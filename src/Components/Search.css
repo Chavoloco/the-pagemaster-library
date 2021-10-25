@@ -1,0 +1,41 @@
+form{
+    margin-top: 3rem;
+}
+
+form input[name="book"]{
+    background-color: transparent;
+    color: white;
+    border: 0;
+    width: 40%;
+    border-bottom: 2px solid whitesmoke;
+    border-radius: 0;
+}
+
+form input:focus{
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+form input, 
+.container::-webkit-input-placeholder{
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.button{
+    margin-left: 1rem;
+    background-color: #E3A230;
+    border-radius: 0 1.5rem 1rem;
+    padding: .4rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    color: white;
+    font-weight: 800;
+    transition: ease .5s;
+}
+
+.button:hover{
+    background-color: #eea526;
+    color: rgb(243, 233, 233);
+    border-radius: 1rem 0rem 1rem;
+}
