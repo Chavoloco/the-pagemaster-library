@@ -1,12 +1,13 @@
 import './App.css';
 import Header from "./Components/Header"
-import Search from './Components/Search';
+import Dashboard from './Components/Dashboard';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Search />
+    
+      <Dashboard />
     </div>
   );
 }

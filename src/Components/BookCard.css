@@ -1,0 +1,8 @@
+.card-body{
+    max-width: 20%;
+}
+
+.imagen img{
+    min-width: 250%;
+    min-height: 250%;
+}
