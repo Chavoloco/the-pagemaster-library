@@ -3,8 +3,7 @@ import './Search.css';
 
 
 const Search = () => {
-
-
+    
     return ( 
         <div>
             <form>

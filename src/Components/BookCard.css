@@ -1,8 +1,22 @@
-.card-body{
-    max-width: 20%;
+.books{
+    min-width: 25%;
+    background: #E3A230;
+    transition: .3s ease;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0,.3);
+    transition: .2s ease;
+    cursor: pointer;
 }
 
-.imagen img{
-    min-width: 250%;
-    min-height: 250%;
+.books:hover{
+    transform: translateY(-15px);
+}
+
+.books .image{
+    width: 80%;
+    vertical-align: top;
+}
+
+.books .image img{
+    height: 500px;
+    width: 325px;
 }

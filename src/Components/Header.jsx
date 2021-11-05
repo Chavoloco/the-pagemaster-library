@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import "../images/Eye_logo.png"
-import "../images/149071.png"
+import logo from '../images/Eye_logo.png'
 
 const Container = styled.div`
     display: flex;
@@ -43,19 +42,20 @@ const Cart = styled.div`
     align-items: center;
 `
 
+
 const Header = () => {
     return ( 
         <Container>
                 <User>
-                <img src="../images/149071.png" />
+                <img src={require("../images/149071.png")} alt="Users"/>
                 <h5>Usuario</h5>
                 </User>
-                <Title>
-                    <img src="../images/Eye:logo.png" />
+                <Title className="logo">
+                    <img src={logo} alt="Logo"/>
                     The Pagemaster
                 </Title>
                 <Cart>
-                    <img src="../images/ShoppingCart.png" />
+                    <img src="../images/ShoppingCart.png" alt="Shopping cart"/>
                 </Cart>
                 <Divider />
         </Container>

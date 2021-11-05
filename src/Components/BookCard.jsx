@@ -1,15 +1,18 @@
 import React from 'react'
 import "./BookCard.css"
 
-const BookCard = ({book}) => {
-    // const price = book.saleInfo.listPrice
-    return ( 
-        <div className="card-body text-white" >
-            <div className="imagen">
-                <img src={book.volumeInfo.imageLinks.thumbnail} alt="book's image"></img>
-            </div>
-            <h3>{book.volumeInfo.title}</h3>
-            {/* <h3>${book.saleInfo.listPrice.amount}</h3> */}
+const BookCard = (book) => {
+
+    return (
+        //new yor times api
+        <div className="books text-white">
+        <div className="image">
+            <img src={book.book.book_image} alt="books"></img>
+        </div>
+        <div className="title">
+            <h3>{book.book.title}</h3>
+            <h3>({book.book.author})</h3>
+        </div>
         </div>
      );
 }
