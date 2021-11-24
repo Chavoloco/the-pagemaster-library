@@ -11,6 +11,7 @@ const BookCard = (book) => {
   return (
     //new yor times api
     <div className="books text-white" onClick={handleClick}>
+      {isSelected ? "Hi" : "Bye"}
       <div className="image">
         <img src={book.book.book_image} alt="books"></img>
       </div>

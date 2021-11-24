@@ -55,7 +55,7 @@ const Header = () => {
         The Pagemaster
       </Title>
       <Cart className="cart">
-        <img src={carrito} />
+        <img src={carrito} alt="cart" />
       </Cart>
       <Divider />
     </Container>
