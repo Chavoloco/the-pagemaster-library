@@ -1,5 +1,35 @@
-.text-white{
-    color: white;
+.text-white {
+  color: white;
 }
 
+.search {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+}
 
+@media screen and (max-width: 800px) {
+  .search {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+.user-img img {
+  max-width: 10%;
+}
+
+.user-img h5 {
+  position: relative;
+  right: 210px;
+  font-size: large;
+}
+
+.cart img {
+  max-width: 5rem;
+}
+
+@media screen and (max-width: 1100px) {
+  .cart img {
+    max-width: 3rem;
+  }
+}
