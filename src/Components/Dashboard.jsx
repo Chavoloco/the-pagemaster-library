@@ -19,7 +19,9 @@ const Dashboard = () => {
   `;
   const [bestSeller, setBestSeller] = useState([]);
   const [categoryWeek, setCategoryWeek] = useState([]);
+  const [categoryName, setCategoryName] = useState([]);
   const [authorsWeek, setAuthorsWeek] = useState([]);
+  const [authorsWeekName, setAuthorsWeekName] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isCategoryLoaded, setIsCategoryLoaded] = useState(false);
   const [isAuthorsLoaded, setIsAuthorsLoaded] = useState(false);
@@ -35,6 +37,76 @@ const Dashboard = () => {
       queryGooglebooksAuthor();
     }
   });
+
+  let handleRandomAuthor = (e) => {
+    const athorsWeekList = [
+      "Albert Espinosa",
+      "Sara Mesa",
+      "Elísabet Benavent",
+      "Eloy Moreno",
+      "Jorge Bucay",
+      "Mercedes Ron",
+      "Philip Roth",
+      "Florencia Bonelli",
+      "Manuel Puig",
+      "Adolfo Bioy Casares",
+      "Fernando Aramburu",
+      "María Dueñas",
+      "María Oruña",
+      "Megan Maxwell",
+      "Eva García Sáenz de Urturi",
+      "Lorenzo Silva",
+    ];
+    setAuthorsWeekName(athorsWeekList[5]);
+  };
+
+  let handleRandomCategory = (e) => {
+    const categoryList = [
+      "Antiques ",
+      "Architecture",
+      "Art",
+      "Bibles",
+      "Biography",
+      "Body",
+      "Business",
+      "Comics",
+      "COMPUTERS",
+      "COOKING",
+      "CRAFTS",
+      "DESIGN",
+      "DRAMA",
+      "EDUCATION",
+      "FAMILY",
+      "FICTION",
+      "GAMES",
+      "HEALTH",
+      "HISTORY",
+      "HOUSE",
+      "HUMOR",
+      "JUVENILE FICTION",
+      "JUVENILE NONFICTION",
+      "YOUNG ADULT FICTION",
+      "YOUNG ADULT NONFICTION",
+      "TRUE CRIME",
+      "TRAVEL",
+      "SELF-HELP",
+      "POETRY",
+      "PHOTOGRAPHY",
+      "PETS",
+      "NATURE",
+      "MUSIC",
+    ];
+
+    let randomNumber = 0;
+    do {
+      randomNumber = Math.floor(Math.random() * 33);
+    } while (randomNumber > 55);
+    console.log(randomNumber);
+    const category = categoryList[randomNumber].toLowerCase();
+    console.log(category);
+    setCategoryName(categoryList[0]);
+    console.log(authorsWeekName);
+  };
 
   const scrollRight = () => {
     const row = document.querySelector(".carousel-container");
@@ -77,7 +149,6 @@ const Dashboard = () => {
         return response.json();
       })
       .then((json) => {
-        console.log(json.results.books);
         setBestSeller(json.results.books);
       })
       .catch((error) => {
@@ -94,8 +165,10 @@ const Dashboard = () => {
 
   // ..................Category of the week query
   const queryGooglebooksCategory = async () => {
+    handleRandomCategory();
+
     await fetch(
-      "https://www.googleapis.com/books/v1/volumes?q=subject:fiction&filter=paid-ebooks&maxResults=20",
+      `https://www.googleapis.com/books/v1/volumes?q=subject:${categoryName}&filter=paid-ebooks&maxResults=20`,
       {
         method: "get",
       }
@@ -104,7 +177,6 @@ const Dashboard = () => {
         return response.json();
       })
       .then((json) => {
-        console.log(json.items);
         setCategoryWeek(json.items);
       })
       .catch((error) => {
@@ -119,8 +191,10 @@ const Dashboard = () => {
   //..................Author of the week query
   const queryGooglebooksAuthor = async () => {
     //Philip Roth
+    handleRandomAuthor();
+
     await fetch(
-      "https://www.googleapis.com/books/v1/volumes?q=inauthor:Philip+Roth&filter=paid-ebooks&maxResults=20",
+      `https://www.googleapis.com/books/v1/volumes?q=inauthor:${authorsWeekName}&filter=paid-ebooks&maxResults=20`,
       {
         method: "get",
       }
@@ -129,7 +203,6 @@ const Dashboard = () => {
         return response.json();
       })
       .then((json) => {
-        console.log(json.items);
         setAuthorsWeek(json.items);
       })
       .catch((error) => {
@@ -152,7 +225,7 @@ const Dashboard = () => {
 
   const handleSelectedBook = (item) => {
     setSelectedBook(item);
-    console.log(item);
+    //console.log(item);
   };
 
   return (
@@ -195,12 +268,13 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
         <Divider />
         <div>
           <div className={anotherStyle}>
             <div className="title-container">
-              <h1 className="text-white">Category of the week: fiction </h1>
+              <h1 className="text-white">
+                Category of the week: {categoryName}
+              </h1>
               <Divider />
             </div>
             <div class="best-seller container">
@@ -234,7 +308,9 @@ const Dashboard = () => {
         <div>
           <div className={anotherStyle}>
             <div className="title-container">
-              <h1 className="text-white">Meeting an author: Philip Roth </h1>
+              <h1 className="text-white">
+                Meeting an author: {authorsWeekName}
+              </h1>
               <Divider />
             </div>
             <div class="best-seller container">

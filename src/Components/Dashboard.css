@@ -1,5 +1,6 @@
 .text-white {
   color: white;
+  text-transform: capitalize;
 }
 
 .search {
