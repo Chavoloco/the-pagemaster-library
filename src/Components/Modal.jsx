@@ -1,14 +1,17 @@
 import React from "react";
 import "./Modal.css";
 
-const Modal = ({ closeModal }) => {
+const Modal = (props) => {
+  const handleCloseModal = () => {
+    props.closeModal(false);
+  };
   return (
     <div className="modal is-open">
       <div className="modal-container">
-        <button className="modal-close" onClick={closeModal}>
+        <button className="modal-close" onClick={handleCloseModal}>
           X
         </button>
-        <div className="description"></div>
+        <div className="description">"Hi it's an description"</div>
       </div>
     </div>
   );

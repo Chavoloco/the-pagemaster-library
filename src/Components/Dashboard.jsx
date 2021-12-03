@@ -21,7 +21,9 @@ const Dashboard = () => {
   const [categoryWeek, setCategoryWeek] = useState([]);
   const [categoryName, setCategoryName] = useState([]);
   const [authorsWeek, setAuthorsWeek] = useState([]);
+  const [categoryNameLoaded, setCategoryNameLoaded] = useState(false);
   const [authorsWeekName, setAuthorsWeekName] = useState();
+  const [authorNameLoaded, setAuthorNameLoaded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isCategoryLoaded, setIsCategoryLoaded] = useState(false);
   const [isAuthorsLoaded, setIsAuthorsLoaded] = useState(false);
@@ -33,79 +35,82 @@ const Dashboard = () => {
       queryNYTbooks();
     } else if (!isCategoryLoaded) {
       queryGooglebooksCategory();
+      handleRandomCategory();
     } else if (!isAuthorsLoaded) {
       queryGooglebooksAuthor();
+      handleRandomAuthor();
     }
   });
 
   let handleRandomAuthor = (e) => {
-    const athorsWeekList = [
-      "Albert Espinosa",
-      "Sara Mesa",
-      "Elísabet Benavent",
-      "Eloy Moreno",
-      "Jorge Bucay",
-      "Mercedes Ron",
-      "Philip Roth",
-      "Florencia Bonelli",
-      "Manuel Puig",
-      "Adolfo Bioy Casares",
-      "Fernando Aramburu",
-      "María Dueñas",
-      "María Oruña",
-      "Megan Maxwell",
-      "Eva García Sáenz de Urturi",
-      "Lorenzo Silva",
-    ];
-    setAuthorsWeekName(athorsWeekList[5]);
+    if (!authorNameLoaded) {
+      const athorsWeekList = [
+        "Albert Espinosa",
+        "Sara Mesa",
+        "Elísabet Benavent",
+        "Eloy Moreno",
+        "Jorge Bucay",
+        "Mercedes Ron",
+        "Philip Roth",
+        "Florencia Bonelli",
+        "Manuel Puig",
+        "Adolfo Bioy Casares",
+        "Fernando Aramburu",
+        "María Dueñas",
+        "María Oruña",
+        "Megan Maxwell",
+        "Eva García Sáenz de Urturi",
+        "Lorenzo Silva",
+      ];
+      const randomNumber = Math.floor(Math.random() * 16);
+      console.log(randomNumber);
+      setAuthorsWeekName(athorsWeekList[randomNumber]);
+      setAuthorNameLoaded(true);
+    }
   };
 
   let handleRandomCategory = (e) => {
-    const categoryList = [
-      "Antiques ",
-      "Architecture",
-      "Art",
-      "Bibles",
-      "Biography",
-      "Body",
-      "Business",
-      "Comics",
-      "COMPUTERS",
-      "COOKING",
-      "CRAFTS",
-      "DESIGN",
-      "DRAMA",
-      "EDUCATION",
-      "FAMILY",
-      "FICTION",
-      "GAMES",
-      "HEALTH",
-      "HISTORY",
-      "HOUSE",
-      "HUMOR",
-      "JUVENILE FICTION",
-      "JUVENILE NONFICTION",
-      "YOUNG ADULT FICTION",
-      "YOUNG ADULT NONFICTION",
-      "TRUE CRIME",
-      "TRAVEL",
-      "SELF-HELP",
-      "POETRY",
-      "PHOTOGRAPHY",
-      "PETS",
-      "NATURE",
-      "MUSIC",
-    ];
+    if (!categoryNameLoaded) {
+      const categoryList = [
+        "Antiques ",
+        "Architecture",
+        "Art",
+        "Bibles",
+        "Biography",
+        "Body",
+        "Business",
+        "Comics",
+        "COMPUTERS",
+        "COOKING",
+        "CRAFTS",
+        "DESIGN",
+        "DRAMA",
+        "EDUCATION",
+        "FAMILY",
+        "FICTION",
+        "GAMES",
+        "HEALTH",
+        "HISTORY",
+        "HOUSE",
+        "HUMOR",
+        "JUVENILE",
+        "YOUNG ADULT",
+        "TRUE CRIME",
+        "TRAVEL",
+        "SELF-HELP",
+        "POETRY",
+        "PHOTOGRAPHY",
+        "PETS",
+        "NATURE",
+        "MUSIC",
+      ];
 
-    let randomNumber = 0;
-    do {
-      randomNumber = Math.floor(Math.random() * 33);
-    } while (randomNumber > 55);
-    console.log(randomNumber);
-    const category = categoryList[randomNumber].toLowerCase();
-    console.log(category);
-    setCategoryName(categoryList[0]);
-    console.log(authorsWeekName);
+      const randomNumber = Math.floor(Math.random() * 33);
+      console.log(randomNumber);
+      const category = categoryList[randomNumber].toLowerCase();
+      setCategoryName(category);
+      setCategoryNameLoaded(true);
+    }
   };
 
   const scrollRight = () => {
@@ -165,8 +170,6 @@ const Dashboard = () => {
 
   // ..................Category of the week query
   const queryGooglebooksCategory = async () => {
-    handleRandomCategory();
-
     await fetch(
       `https://www.googleapis.com/books/v1/volumes?q=subject:${categoryName}&filter=paid-ebooks&maxResults=20`,
       {
@@ -191,7 +194,6 @@ const Dashboard = () => {
   //..................Author of the week query
   const queryGooglebooksAuthor = async () => {
     //Philip Roth
-    handleRandomAuthor();
 
     await fetch(
       `https://www.googleapis.com/books/v1/volumes?q=inauthor:${authorsWeekName}&filter=paid-ebooks&maxResults=20`,
@@ -223,15 +225,12 @@ const Dashboard = () => {
     anotherStyle = "best-seller-deactive";
   }
 
-  const handleSelectedBook = (item) => {
-    setSelectedBook(item);
-    //console.log(item);
-  };
-
   return (
     <div>
       <Search handleBookChange={handleBookChange} />
-      <Divider />
+      <div className={anotherStyle}>
+        <Divider />
+      </div>
       <div>
         <div className={anotherStyle}>
           <div className="title-container">
@@ -250,11 +249,7 @@ const Dashboard = () => {
               <div className="carousel-container">
                 <div className="carousel">
                   {bestSeller.map((item) => (
-                    <BookCard
-                      key={item.id}
-                      book={item}
-                      handleSelectedBook={handleSelectedBook}
-                    />
+                    <BookCard key={item.id} book={item} />
                   ))}
                 </div>
               </div>
@@ -268,7 +263,9 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <Divider />
+        <div className={anotherStyle}>
+          <Divider />
+        </div>
         <div>
           <div className={anotherStyle}>
             <div className="title-container">
@@ -304,7 +301,9 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <Divider />
+        <div className={anotherStyle}>
+          <Divider />
+        </div>
         <div>
           <div className={anotherStyle}>
             <div className="title-container">

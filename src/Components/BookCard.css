@@ -12,13 +12,11 @@
 }
 
 .books .image {
-  width: 80%;
   vertical-align: top;
 }
 
 .books .image img {
-  height: 500px;
-  /* width: 100%; */
+  width: 100%;
   object-fit: contain;
   object-position: center;
 }

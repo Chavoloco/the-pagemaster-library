@@ -27,6 +27,9 @@
 .App-link {
   color: #61dafb;
 }
+.logo {
+  cursor: pointer;
+}
 
 .logo img {
   width: 75px;
@@ -34,6 +37,10 @@
   position: sticky;
   right: 1%;
   top: 110%;
+}
+.logo a {
+  color: white;
+  text-decoration: none;
 }
 
 @keyframes App-logo-spin {

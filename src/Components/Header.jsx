@@ -29,6 +29,7 @@ const User = styled.div`
   justify-content: center;
   margin: 3rem;
   align-items: flex-start;
+  cursor: pointer;
 `;
 
 const Cart = styled.div`
@@ -41,16 +42,20 @@ const Cart = styled.div`
   margin: 3rem;
   left: 90%;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Header = () => {
+  const reload = (e) => {
+    window.location.reload(true);
+  };
   return (
     <Container>
       <User className="user-img">
         <img src={user} alt="Users" />
         <h5>Usuario</h5>
       </User>
-      <Title className="logo">
+      <Title className="logo" onClick={reload}>
         <img src={logo} alt="Logo" />
         The Pagemaster
       </Title>
