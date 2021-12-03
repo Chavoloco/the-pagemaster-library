@@ -3,7 +3,6 @@ import Search from "./Search";
 import "./Dashboard.css";
 import styled from "@emotion/styled";
 import BookCard from "./BookCard";
-import Modal from "./Modal";
 import BookCardGoogle from "./BookCardGoogle";
 import "./Carousel.css";
 
@@ -28,7 +27,9 @@ const Dashboard = () => {
   const [isCategoryLoaded, setIsCategoryLoaded] = useState(false);
   const [isAuthorsLoaded, setIsAuthorsLoaded] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [selectedBook, setSelectedBook] = useState(false);
+
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     if (!isLoaded) {
@@ -111,6 +112,19 @@ const Dashboard = () => {
       setCategoryName(category);
       setCategoryNameLoaded(true);
     }
+  };
+  const handleModalClose = (e) => {
+    const currentClass = e.target.className;
+
+    if (currentClass === "modal-card") {
+      return;
+    }
+
+    setOpenModal(false);
+  };
+
+  const handleModalOpen = () => {
+    setOpenModal(true);
   };
 
   const scrollRight = () => {
@@ -249,7 +263,13 @@ const Dashboard = () => {
               <div className="carousel-container">
                 <div className="carousel">
                   {bestSeller.map((item) => (
-                    <BookCard key={item.id} book={item} />
+                    <>
+                      <BookCard key={item.id} book={item} />
+
+                      {/* <button className="button" onClick={handleModalOpen}>
+                        Open Modal
+                      </button> */}
+                    </>
                   ))}
                 </div>
               </div>
@@ -339,7 +359,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div>{selectedBook && <Modal movie={selectedBook} />}</div>
       </div>
     </div>
   );

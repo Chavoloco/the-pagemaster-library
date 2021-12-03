@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
 import "./BookCard.css";
+import Modal from "./Modal";
 
 const BookCard = (book) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
 
   const handleOpenModal = () => {
-    setOpenModal(true);
+    setIsSelected(true);
   };
 
-  const closeModal = () => {
-    setOpenModal(false);
+  const handleCloseModal = () => {
+    setIsSelected(false);
   };
+
   return (
     //new yor times api
     <div className="books text-white" onClick={handleOpenModal}>
@@ -22,7 +23,9 @@ const BookCard = (book) => {
         <h3>{book.book.title}</h3>
         <h3>({book.book.author})</h3>
       </div>
-      {openModal ? <Modal closeModal={closeModal} /> : <div></div>}
+      {isSelected ? (
+        <Modal handleCloseModal={handleCloseModal} book={book} />
+      ) : null}
     </div>
   );
 };
