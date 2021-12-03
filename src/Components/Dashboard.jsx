@@ -27,9 +27,6 @@ const Dashboard = () => {
   const [isCategoryLoaded, setIsCategoryLoaded] = useState(false);
   const [isAuthorsLoaded, setIsAuthorsLoaded] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
-  const [selectedBook, setSelectedBook] = useState(false);
-
-  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     if (!isLoaded) {
@@ -112,19 +109,6 @@ const Dashboard = () => {
       setCategoryName(category);
       setCategoryNameLoaded(true);
     }
-  };
-  const handleModalClose = (e) => {
-    const currentClass = e.target.className;
-
-    if (currentClass === "modal-card") {
-      return;
-    }
-
-    setOpenModal(false);
-  };
-
-  const handleModalOpen = () => {
-    setOpenModal(true);
   };
 
   const scrollRight = () => {
